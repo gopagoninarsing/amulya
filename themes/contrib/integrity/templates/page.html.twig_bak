@@ -1,0 +1,16 @@
+
+    {% if is_front and slider_contents %}
+      <!-- CAROUSEL -->
+      <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          {% for key, slider in slider_contents %}
+              {% autoescape 'html' %}
+                {{ slider | raw }}
+              {% endautoescape %}
+
+          {% endfor %}
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+      </div>
+    {% endif %}

@@ -1,0 +1,20 @@
+uuid: 61cb9f46-a516-4390-922c-ece2c318d0d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_balance_amount
+field_name: field_balance_amount
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,34 @@
+uuid: 11e0b86e-368b-4386-b217-3cd58833e028
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_payments
+    - node.type.bill
+    - paragraphs.paragraphs_type.payments
+  module:
+    - entity_reference_revisions
+id: node.bill.field_payments
+field_name: field_payments
+entity_type: node
+bundle: bill
+label: Payments
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      payments: payments
+    target_bundles_drag_drop:
+      payments:
+        enabled: true
+        weight: 3
+      services:
+        weight: 4
+        enabled: false
+field_type: entity_reference_revisions

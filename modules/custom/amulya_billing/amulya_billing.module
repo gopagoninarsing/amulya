@@ -1,0 +1,122 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+use \Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @file
+ * Used for all smartourist_custom customizations
+ *
+ */
+
+
+/*
+ * Implements hook_ENTITY_TYPE_presave
+ */
+function amulya_billing_node_presave(NodeInterface $node) {
+  //TODO: Add bundle condition
+  if ($node->get('field_balance_amount')->getValue()[0]['value'] > 0) {
+    $node->set('field_bill_status', 'pending');
+  }
+}
+
+function latestBillId() {
+    $connection = \Drupal::database();
+    $query = $connection->query("SELECT max(title) FROM {node_field_data} 
+                                 WHERE type = :type and status = 1",
+    [':type' => 'bill']);
+    $bill_no = $query->fetchField();
+    return $bill_no+1;
+}
+
+function amulya_billing_form_alter(&$form, $form_state, $form_id) {
+    if ($form_id == 'node_bill_form') {
+        $form['title']['widget'][0]['value']['#default_value'] = latestBillId();
+        $form['title']['#disabled'] = 'disabled';
+        $form['#theme'] = 'billform';
+        //dump($form['title']["#attributes"]);
+    }
+}
+
+
+/*
+ * Implements hook_ENTITY_TYPE_presave
+ */
+function amulya_billing_theme() {
+    return [
+        'billform' => [
+            'render element' => 'form',
+        ],
+    ];
+}
+
+
+function amulya_billing_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+    $suggestions[] = sprintf('views_view__%s', $variables['view']->id());
+}
+
+function amulya_billing_theme_suggestions_paragraph_alter(&$suggestions, $variables) {
+    $paragraph = $variables['elements']['#paragraph'];
+    $param = \Drupal::routeMatch()->getParameter('printable_format');
+
+    if($param == 'print') {
+        $suggestions[] = 'paragraph__' .  $paragraph->bundle() ."__print";
+    }
+}
+
+function get_bill_totals($node) {
+    $services = $node->get('field_services')->getValue();
+    $payments = $node->get('field_payments')->getValue();
+
+    $total_amount = 0;
+    $total_payments = 0;
+    foreach($services as $service) {
+        $service_info = \Drupal\paragraphs\Entity\Paragraph::load($service['target_id']);
+        $total_amount = $total_amount + $service_info->get('field_total')->getValue()[0]['value'];
+    }
+    
+    foreach($payments as $payment) {
+        $payments_info = \Drupal\paragraphs\Entity\Paragraph::load($payment['target_id']);
+        $total_payments = $total_payments + $payments_info->get('field_paid_amount')->getValue()[0]['value'];
+    }
+    $balance = $total_amount - $total_payments;
+    $total_words = '';
+    if ($total_amount > 0) {
+        $total_words = getIndianCurrency($total_amount);
+    }
+    return ['total' => $total_amount, 'paid' => $total_payments, 'balance' => $balance, 'total_words' => $total_words];
+}
+
+function getIndianCurrency($number) {
+  $decimal = round($number - ($no = floor($number)), 2) * 100;
+  $hundred = null;
+  $digits_length = strlen($no);
+  $i = 0;
+  $str = array();
+  $words = array(0 => '', 1 => 'one', 2 => 'two',
+  3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
+  7 => 'seven', 8 => 'eight', 9 => 'nine',
+  10 => 'ten', 11 => 'eleven', 12 => 'twelve',
+  13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
+  16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+  19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+  40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+  70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
+  $digits = array('', 'hundred','thousand','lakh', 'crore');
+  while( $i < $digits_length ) {
+      $divider = ($i == 2) ? 10 : 100;
+      $number = floor($no % $divider);
+      $no = floor($no / $divider);
+      $i += $divider == 10 ? 1 : 2;
+      if ($number) {
+          $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+          $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+          $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+      } else $str[] = null;
+  }
+  $Rupees = implode('', array_reverse($str));
+  $paise = ($decimal) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+  return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+}

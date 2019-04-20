@@ -1,0 +1,23 @@
+uuid: 2dc1b36a-3c95-47ef-baea-c8175cdfc4f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_price
+    - paragraphs.paragraphs_type.services
+id: paragraph.services.field_price
+field_name: field_price
+entity_type: paragraph
+bundle: services
+label: Price
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

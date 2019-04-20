@@ -1,0 +1,139 @@
+<style>
+
+  .date-label {
+    float: left;
+    padding-top: 20px;
+    margin-right: 30px;
+  }
+
+  .field--name-field-bill-date {
+    float: left;
+  }
+  
+  .form-title input {
+    border: none;
+    background: none;
+    width: 100px;    
+  }
+  .form-title label {
+    width: 100px;
+    float: left;
+    padding-top: 5px;
+  }
+  
+  .form-date {
+    margin-right:13%;
+  }
+
+  .form-date h4{
+    display:none;
+  }
+  
+  .form-left {
+     float:left;
+  }
+  
+  .form-wrapper .age {
+    width: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .form-wrapper .mobile {
+    width: 150px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .form-wrapper .patient-name {
+    width: 150px;
+     margin-right: 5px;
+  }
+
+   .form-wrapper .coming-from {
+    width: 150px;
+     margin-left: 5px;
+  }
+
+  .node-form .form-wrapper {
+    margin-bottom: 0em !important;
+  }
+  
+  .js-form-type-vertical-tabs {
+    display:none;
+  }
+
+  .field--name-field-service {
+    width: 20%;
+    float: left;
+    margin-right: 5px;
+  }
+  
+  .field--name-field-price,
+  .field--name-field-quantity {
+    float: left;
+    margin-right: 5px;
+  }
+
+  .paragraph-type-top .paragraphs-dropbutton-wrapper {
+  text-align: right;
+  width: 67%;
+  position: absolute;
+  padding-top: 20px;
+  clear: both;
+  }
+
+  .paragraph-type-title,
+  .tabledrag-toggle-weight {
+  display:none;
+  }
+  #field-payments-values .field--type-datetime {
+  float: left;
+  width: 15%;
+  }
+
+  .js .field--widget-entity-reference-paragraphs .field-multiple-table {
+  margin-bottom: 10px;
+  width: 75%;
+  }
+  
+  
+</style>
+<div class="form-wrapper">
+  
+
+  <div class="form-details-wrapper">
+    <div class="form-date form-left">
+      <span class="date-label" >Bill Date :</span> {{ form.field_bill_date }}
+    </div>
+    
+    <div class="form-title form-left">
+      {{ form.title }}
+    </div>
+    <div style="clear:both"></div>
+  </div>
+    
+  
+  <div class="form-details-wrapper">
+    <div class="form-left patient-name">
+    {{ form.field_patient_name }}
+    </div>
+    
+    <div class="form-left mobile">
+      {{ form.field_mobile }}
+    </div>
+
+    <div class="form-left age">
+      {{ form.field_age }}
+    </div>
+    
+    <div class="form-left coming-from">
+      {{ form.field_coming_from }}
+    </div>
+
+    <div style="clear:both"></div>
+  </div>
+
+  {{ form | without('title', 'field_bill_date',  'field_mobile', 'field_patient_name', 'field_coming_from', 'field_age', 'field_balance_amount', 'field_bill_status') }}
+</div>
+

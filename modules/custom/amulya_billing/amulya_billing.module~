@@ -1,0 +1,67 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+use \Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @file
+ * Used for all smartourist_custom customizations
+ *
+ */
+
+
+/*
+ * Implements hook_ENTITY_TYPE_presave
+ */
+function amulya_billing_node_presave(NodeInterface $node) {
+  //TODO: Add bundle condition
+  if ($node->get('field_balance_amount')->getValue()[0]['value'] > 0) {
+    $node->set('field_bill_status', 'pending');
+  }
+}
+
+function latestBillId() {
+    $connection = \Drupal::database();
+    $query = $connection->query("SELECT max(title) FROM {node_field_data} 
+                                 WHERE type = :type and status = 1",
+    [':type' => 'bill']);
+    $bill_no = $query->fetchField();
+    return $bill_no+1;
+}
+
+function amulya_billing_form_alter(&$form, $form_state, $form_id) {
+    if ($form_id == 'node_bill_form') {
+        $form['title']['widget'][0]['value']['#default_value'] = latestBillId();
+        $form['title']['#disabled'] = 'disabled';
+        $form['#theme'] = 'billform';
+        //dump($form['title']["#attributes"]);
+    }
+}
+
+
+/*
+ * Implements hook_ENTITY_TYPE_presave
+ */
+function amulya_billing_theme() {
+    return [
+        'billform' => [
+            'render element' => 'form',
+        ],
+    ];
+}
+
+
+function amulya_billing_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+    $suggestions[] = sprintf('views_view__%s', $variables['view']->id());
+}
+
+function amulya_billing_theme_suggestions_paragraph_alter(&$suggestions, $variables) {
+    $paragraph = $variables['elements']['#paragraph'];
+    $param = \Drupal::routeMatch()->getParameter('printable_format');
+
+    if($param == 'print') {
+        $suggestions[] = 'paragraph__' .  $paragraph->bundle() ."__print";
+    }
+}

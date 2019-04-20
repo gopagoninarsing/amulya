@@ -1,0 +1,25 @@
+uuid: 3b4049fa-c597-408e-bb4a-8d91628f4511
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_quantity
+    - paragraphs.paragraphs_type.services
+id: paragraph.services.field_quantity
+field_name: field_quantity
+entity_type: paragraph
+bundle: services
+label: Qty
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

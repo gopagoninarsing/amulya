@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function azri_custom_views_data_alter(array &$data) {
+    $data['node']['disclaimer'] = array(
+        'title' => t('Disclaimer'),
+	    'field' => array(
+            'title' => t('Disclaimer'),
+            'help' => t('Used Logos Disclaimer'),
+            'id' => 'logos_disclaimer',
+        ),
+    );
+    $data['node']['clients_header'] = array(
+        'title' => t('Clients Header'),
+	    'field' => array(
+            'title' => t('Clients Header'),
+            'help' => t('Clients Header'),
+            'id' => 'clients_header',
+        ),
+    );
+    $data['node']['platforms_header'] = array(
+        'title' => t('Platforms Header'),
+	    'field' => array(
+            'title' => t('Platforms Header'),
+            'help' => t('Platforms Header'),
+            'id' => 'platforms_header',
+        ),
+    );
+    $data['taxonomy_term_data']['programming_languages_header'] = array(
+        'title' => t('Programming Langunages Header'),
+	    'field' => array(
+            'title' => t('Programming Languages Header'),
+            'help' => t('Programming Languages Header'),
+            'id' => 'programming_languages_header',
+        ),
+    );
+    $data['node']['case_studies_header'] = array(
+        'title' => t('Case Studies Header'),
+	    'field' => array(
+            'title' => t('Case Studies Header'),
+            'help' => t('Case Studies Header'),
+            'id' => 'case_studies_header',
+        ),
+    );
+}

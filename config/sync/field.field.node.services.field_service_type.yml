@@ -1,0 +1,23 @@
+uuid: a692a09f-3cde-44ec-b8a5-81bb1a55f2a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_type
+    - node.type.services
+  module:
+    - options
+id: node.services.field_service_type
+field_name: field_service_type
+entity_type: node
+bundle: services
+label: 'Service type'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: Hospital
+default_value_callback: ''
+settings: {  }
+field_type: list_string

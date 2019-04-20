@@ -1,0 +1,18 @@
+uuid: 2a950732-668f-40da-a2e9-3872ab276add
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.bill
+id: node.bill.title
+field_name: title
+entity_type: node
+bundle: bill
+label: 'Bill Number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

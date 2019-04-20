@@ -1,0 +1,23 @@
+uuid: 69e4d6e2-a9c3-43dc-9923-0b77307d87ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_total
+    - paragraphs.paragraphs_type.services
+id: paragraph.services.field_total
+field_name: field_total
+entity_type: paragraph
+bundle: services
+label: Total
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

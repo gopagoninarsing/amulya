@@ -1,0 +1,48 @@
+uuid: 3bae5a68-b11f-4e11-8b32-d20b65878f11
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.services.field_service_price
+    - field.field.node.services.field_service_type
+    - field.field.node.services.field_status
+    - node.type.services
+  module:
+    - options
+    - user
+id: node.services.default
+targetEntityType: node
+bundle: services
+mode: default
+content:
+  field_service_price:
+    weight: 102
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_service_type:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_status:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

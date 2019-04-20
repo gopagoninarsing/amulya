@@ -1,0 +1,32 @@
+uuid: c4070043-2ce3-44ba-b03a-479882007618
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.payments.field_paid_amount
+    - field.field.paragraph.payments.field_payment_date
+    - paragraphs.paragraphs_type.payments
+  module:
+    - datetime
+id: paragraph.payments.default
+targetEntityType: paragraph
+bundle: payments
+mode: default
+content:
+  field_paid_amount:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_payment_date:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

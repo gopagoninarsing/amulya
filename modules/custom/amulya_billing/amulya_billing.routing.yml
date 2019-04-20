@@ -1,0 +1,7 @@
+amulya_billing.balance_payment:
+  path: 'pay-balance/{id}'
+  defaults:
+    _form: '\Drupal\amulya_billing\Form\PayBalanceForm'
+    _title: 'Balance Payment'
+  requirements:
+    _permission: 'access content'

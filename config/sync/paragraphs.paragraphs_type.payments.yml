@@ -1,0 +1,9 @@
+uuid: 420360cc-14c8-4094-ae8d-b4c784c67e0e
+langcode: en
+status: true
+dependencies: {  }
+id: payments
+label: Payments
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

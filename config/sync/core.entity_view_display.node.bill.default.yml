@@ -1,0 +1,121 @@
+uuid: f2ea4c32-3d77-4189-b95d-de31a7814010
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.bill.field_age
+    - field.field.node.bill.field_balance_amount
+    - field.field.node.bill.field_bill_date
+    - field.field.node.bill.field_bill_status
+    - field.field.node.bill.field_coming_from
+    - field.field.node.bill.field_mobile
+    - field.field.node.bill.field_patient_name
+    - field.field.node.bill.field_payments
+    - field.field.node.bill.field_services
+    - field.field.node.bill.field_total_amount
+    - node.type.bill
+  module:
+    - datetime
+    - entity_reference_revisions
+    - options
+    - user
+id: node.bill.default
+targetEntityType: node
+bundle: bill
+mode: default
+content:
+  field_age:
+    weight: 111
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_balance_amount:
+    weight: 109
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_bill_date:
+    weight: 110
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_bill_status:
+    weight: 112
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_coming_from:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_mobile:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_patient_name:
+    weight: 115
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_payments:
+    type: entity_reference_revisions_entity_view
+    weight: 114
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_services:
+    type: entity_reference_revisions_entity_view
+    weight: 113
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_total_amount:
+    weight: 107
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

@@ -1,0 +1,4 @@
+name: amulya-billing
+recipe: drupal8
+config:
+  webroot: .

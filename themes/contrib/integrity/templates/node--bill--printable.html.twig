@@ -1,0 +1,150 @@
+<style>
+  th{
+    width:50px;
+  }
+
+  .item-left {
+    float:left;
+  }
+  .item-right {
+  width:145px;
+  float:left;
+  }
+  .field__label {
+  display: none;
+  }
+  .name{
+  width:230px !important;
+  }
+  .age {
+  width:50px !important;
+  }
+  .balance {
+  border-top: 1px solid;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  }
+  .total {
+  border-top: 1px solid;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  }
+</style>
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+  <div class="node--content-container">
+    {% block node_side %}
+    {% endblock %}
+
+
+    <div{{ content_attributes.addClass('node--content', 'clearfix') }}>
+      {% block content %}
+
+      <div>
+	<div style ="text-align:center;"><p><h3> Dr. Kameswari S V Clinic </h3></p> </div>
+	
+	<div style ="text-align:center; font-size:13px;margin-bottom:5px;">
+          <div>H.NO. 11-10-16/A, AMAR PREMALAYAM, Road No 2, SBI COLONY, Kothpet , HYD-500035</div>
+          <div>PHONE: 040-24056984, 9542727674</div>
+	</div>
+	<div style="clear:both"></div>
+	
+	<div class = 'bill-wrapper' style="border: 1px dotted;padding-left: 20px;padding-bottom: 20px;width: 650px; font-size:15px;">
+       <div class = 'wrapper'>
+        <p>
+          <div style="float:left; width:450px;"><div class= 'item-left'><b>Bill Date : </b></div>
+	    <div class= 'item-right'>{{ content.field_bill_date }}</div>
+	  </div>
+
+	  <div  style="float:left"><b>Bill Number :</b> <span>{{ label }}</span></div>
+        </p>
+        </div>
+       <div style="clear:both"></div>
+       <div class = 'wrapper'>
+          <p>
+            <div style="float:left; width:340px;">
+	      <div class= 'item-left'><b>Patient Name : </b></div>
+	      <div class= 'item-right name'> {{ content.field_patient_name }} </div>
+	    </div>
+            <div  style="float:left; width:100px; ">
+	      <div class= 'item-left'><b>Age : </b></div>
+	      <div class= 'item-right age'> {{ content.field_age }} </div>
+	    </div>
+            <div  style="float:left;">
+	      <div class= 'item-left'><b>Mobile : </b></div>
+	      <div class= 'item-right mobile'> {{ content.field_mobile }} </div>
+	    </div>
+          </p>
+          </div>
+       <div style="clear:both"></div>
+
+       <div style="clear:both"></div>
+
+       	<table style="margin-top:20px;width:650px;border-collapse: unset;">
+	  <tr><th>Service</th> <th>Price</th> <th>Quantity</th> <th>Total</th> </tr>
+	  {{ content.field_services }}
+	  <tr><td></td><td></td><td></td> <td></td></tr>
+	  <tr><td></td><td></td><td><b>Total</b></td> <td>
+	      <div class='total'>{{ payments.total }}/-</div>
+	    </td>
+	  </tr>
+	</table>
+
+	<div class = 'wrapper'>
+          <p>
+            <div style="float:left;text-transform:capitalize; "><b>Amount In Words :</b> <span>{{- payments.total_words -}} Only/-</span></div>
+          </p>
+	</div>
+
+	
+        <div style="clear:both"></div>
+
+
+	<table style="margin-top:20px;width:650px;border-collapse: unset;">
+	  <tr><th>Payment Date</th> <th></th> <th></th> <th>Amount Paid</th> </tr>
+	  {{ content.field_payments }}
+	  <tr><td></td><td></td><td></td> <td></td></tr>
+	  <tr><td></td><td></td><td><b>Total Paid</b></td> <td>
+	      <div class='balance'>{{ payments.paid }}/-</div></td> </tr>
+	  <tr><td></td><td></td><td><b>Balance</b></td> <td>
+	      <div class='balance' style="color:red;">{{ payments.balance }}/-</div></td> </tr>
+	</table>
+	
+
+	
+       <div style="clear:both"></div>
+
+       
+
+       <div class = 'wrapper'>
+         <p>
+           <div style="float:left;    margin-left: 500px;">Authorised Signature<span></div>
+         </p>
+       </div>
+       
+       <div style="clear:both"></div>
+       <div class = 'wrapper'>
+         <div style="float:left;    margin-left: 540px;font-size:13px;"><i>Madhavi<span></i></div>
+       </div>
+       <div style="clear:both"></div>
+	</div>
+      </div>
+      
+      {% endblock %}
+    </div>
+  </div>
+</article>

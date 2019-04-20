@@ -1,0 +1,49 @@
+uuid: 53e5ebe4-b324-4987-abb7-a4bec30b4c62
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.services.field_price
+    - field.field.paragraph.services.field_quantity
+    - field.field.paragraph.services.field_service
+    - field.field.paragraph.services.field_total
+    - paragraphs.paragraphs_type.services
+id: paragraph.services.default
+targetEntityType: paragraph
+bundle: services
+mode: default
+content:
+  field_price:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_quantity:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_service:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_total:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

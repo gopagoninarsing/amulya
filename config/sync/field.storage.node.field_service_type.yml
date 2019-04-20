@@ -1,0 +1,27 @@
+uuid: 29df8e5a-4f20-4bbb-8b4b-b216a9e8fac4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_service_type
+field_name: field_service_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Hospital
+      label: Hospital
+    -
+      value: External
+      label: External
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

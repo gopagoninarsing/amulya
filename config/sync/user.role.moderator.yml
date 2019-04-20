@@ -1,0 +1,23 @@
+uuid: 541ebb15-077b-4502-b9ce-d213af605cb7
+langcode: en
+status: true
+dependencies: {  }
+id: moderator
+label: Moderator
+weight: 3
+is_admin: null
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access files overview'
+  - 'access user profiles'
+  - 'cancel account'
+  - 'change own username'
+  - 'create bill content'
+  - 'create services content'
+  - 'create terms in tags'
+  - 'edit any bill content'
+  - 'edit any services content'
+  - 'edit own comments'
+  - 'post comments'
+  - 'use text format basic_html'

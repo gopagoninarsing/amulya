@@ -1,0 +1,5 @@
+name: Amulya Billing Customizations
+description: Amulya Billing Customizations
+type: module
+core: 8.x
+package: Custom

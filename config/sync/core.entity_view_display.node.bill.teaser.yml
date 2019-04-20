@@ -1,0 +1,40 @@
+uuid: 0555839e-0a30-49e8-9468-38e19609a07c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.bill.field_age
+    - field.field.node.bill.field_balance_amount
+    - field.field.node.bill.field_bill_date
+    - field.field.node.bill.field_bill_status
+    - field.field.node.bill.field_coming_from
+    - field.field.node.bill.field_mobile
+    - field.field.node.bill.field_patient_name
+    - field.field.node.bill.field_payments
+    - field.field.node.bill.field_services
+    - field.field.node.bill.field_total_amount
+    - node.type.bill
+  module:
+    - user
+id: node.bill.teaser
+targetEntityType: node
+bundle: bill
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_age: true
+  field_balance_amount: true
+  field_bill_date: true
+  field_bill_status: true
+  field_coming_from: true
+  field_mobile: true
+  field_patient_name: true
+  field_payments: true
+  field_services: true
+  field_total_amount: true

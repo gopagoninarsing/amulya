@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Definition of Drupal\azri_custom\Plugin\views\field\LogosDisclaimer
+ */
+
+namespace Drupal\azri_custom\Plugin\views\field;
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\views\Plugin\views\field\FieldPluginBase;
+use Drupal\views\ResultRow;
+
+/**
+ * Field handler to flag the node type.
+ *
+ * @ingroup views_field_handlers
+ *
+ * @ViewsField("platforms_header")
+ */
+class PlatformsHeader extends FieldPluginBase {
+    
+    /**
+     * @{inheritdoc}
+     */
+    public function query() {
+        // Leave empty to avoid a query on this field.
+    }
+    
+    /**
+     * Define the available options
+     * @return array
+     */
+    protected function defineOptions() {
+        $options = parent::defineOptions();
+        return $options;
+    }
+    
+    /**
+     * Provide the options form.
+     */
+    public function buildOptionsForm(&$form, FormStateInterface $form_state) {
+        parent::buildOptionsForm($form, $form_state);
+    }
+
+    /**
+     * @{inheritdoc}
+     */
+    public function render(ResultRow $values) {
+        $settings = \Drupal::config('azri.settings');
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $name = "azri.".$language;
+        return $settings->get($name.'.home_platforms');  
+        //return 'Platforms';
+    }
+}
